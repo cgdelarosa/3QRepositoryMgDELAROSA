@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>colleen's Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+<style>
+  /* Reset and base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #111;
+    color: #f3f0eb;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Compact header */
+  header {
+    background: #f58220; /* Haikyuu orange */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  header h1 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #111;
+  }
+
+  nav a {
+    color: #111;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  nav a:first-child {
+    margin-left: 0;
+  }
+
+  nav a:hover,
+  nav a:focus {
+    color: #fff;
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+
+  /* Main content */
+  main {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 30px auto 50px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  /* About Section */
+  .about-title {
+    font-size: 2rem;
+    color: #f58220;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .about-subtitle {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    color: #d2691e;
+    margin-bottom: 20px;
+  }
+
+  .about-gif {
+    width: 50%;
+    max-width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(245, 130, 32, 0.7);
+    margin-bottom: 25px;
+  }
+
+  /* Hero Image */
+  .hero-image {
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #f58220;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+  }
+
+  .hero-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #fff;
+  }
+
+  
+
+  /* Footer */
+  footer {
+  background-color: #0a0a0a;
+  padding: 30px 15px;
+  border-top: 2px solid #e09736;
+  color: #bbb;
+  font-size: 0.9rem;
+  text-align: center;
+  font-family: 'Poppisn', sans-serif;
+  margin-top: 80px;
+}
+
+footer a {
+  color: #e09736;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="assets/pshslogo.png" alt="PSHS Logo" title="PSHS Logo" style="height: 50px; width: auto;" />
+  <nav>
+      <a href="./public/Q3ArrayOfObjects.html">Array of Objects</a>
+      <a href="./public/Q3ObjectsofObjects.html">Objects of Objects</a>
+      <a href="./public/Q3_2GMgDelaRosa.html">2nd Graded</a>
+      
+  </nav>
+</header>
+
+<main>
+  <section class="about-section">
+    <h2 class="about-title">colleen's portfolio! (˶˃ ᵕ ˂˶)</h2>
+    <p class="about-subtitle">(greatest loopy and akaashi keiji fan there is) ⤵</p>
+    <br>
+    <br>
+  </section>
+
+  <section class="hero-section">
+    <img
+      src="assets/haikyuu-season-4.jpg"
+      alt="Haikyuu Season 4"
+      class="hero-image"
+      title="Haikyuu Season 4"
+    />
+  </section>
+</main>
+
+<footer>
+  © 2025 cgdelarosa's Portfolio | <a href="https://github.com/cgdelarosa/2QRepositoryMgDELAROSA" target="_blank">Access to my Github</a>
+</footer>
+
+</body>
+</html>
