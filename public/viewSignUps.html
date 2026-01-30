@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>View Club Signups</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        padding: 20px;
+        max-width: 900px;
+        margin: auto;
+    }
+    h1 {
+        text-align: center;
+    }
+    a.back-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 8px 14px;
+        background-color: #3366cc;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    a.back-btn:hover {
+        background-color: #254b99;
+    }
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    select {
+        padding: 6px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        width: 250px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+    table, th, td {
+        border: 1px solid #3366cc;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #3366cc;
+        color: white;
+    }
+    tr:nth-child(even) {
+        background-color: #e8f0ff;
+    }
+    #totalSignups {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    #message {
+        font-style: italic;
+        color: #cc0000;
+    }
+</style>
+<script>
+function getSignups() {
+    const data = localStorage.getItem('clubSignups');
+    if (!data) return [];
+    try {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed)) return parsed;
+        else return [];
+    } catch {
+        return [];
+    }
+}
+function populateClubFilter(signups) {
+    const clubSelect = document.getElementById('clubFilter');
+    const allClubs = [
+        "Basketball Club",
+        "Computer Science Club",
+        "Model United Nations (MUN)",
+        "Performing Arts",
+        "School Newspaper"
+    ];
+    clubSelect.innerHTML = '';
+    const allOption = document.createElement('option');
+    allOption.value = 'all';
+    allOption.textContent = 'All Clubs';
+    clubSelect.appendChild(allOption);
+    allClubs.forEach(clubName => {
+        const opt = document.createElement('option');
+        opt.value = clubName;
+        opt.textContent = clubName;
+        clubSelect.appendChild(opt);
+    });
+}
+function renderTable(signups) {
+    const tbody = document.getElementById('signupsBody');
+    tbody.innerHTML = '';
+    signups.forEach(signup => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${signup.studentId}</td>
+            <td>${signup.fullname}</td>
+            <td>${signup.birthday}</td>
+            <td>${signup.email}</td>
+            <td>${signup.mobile}</td>
+            <td>${signup.gradelevel}</td>
+            <td>${signup.status}</td>
+            <td>${signup.club}</td>
+            <td>${signup.reason}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+function displayTotal(count) {
+    document.getElementById('totalSignups').textContent = `Total Signups: ${count}`;
+}
+function showMessage(msg) {
+    document.getElementById('message').textContent = msg;
+}
+function clearMessage() {
+    document.getElementById('message').textContent = '';
+}
+function filterSignups() {
+    clearMessage();
+    const selectedClub = document.getElementById('clubFilter').value;
+    const allSignups = getSignups();
+    if (allSignups.length === 0) {
+        renderTable([]);
+        displayTotal(0);
+        showMessage('No sign-ups found.');
+        return;
+    }
+    if (selectedClub === 'all') {
+        renderTable(allSignups);
+        displayTotal(allSignups.length);
+    } else {
+        const filtered = allSignups.filter(s => s.club === selectedClub);
+        if (filtered.length === 0) {
+            renderTable([]);
+            displayTotal(0);
+            showMessage(`No sign-ups for the club "${selectedClub}".`);
+        } else {
+            renderTable(filtered);
+            displayTotal(filtered.length);
+        }
+    }
+}
+function init() {
+    const allSignups = getSignups();
+    populateClubFilter(allSignups);
+    filterSignups();
+    document.getElementById('clubFilter').addEventListener('change', filterSignups);
+}
+window.onload = init;
+</script>
+</head>
+<body>
+
+<h1>Show List of Students Who Signed-Up</h1>
+<a href="Q3_2GMgDelaRosa.html" class="back-btn">← Back to Signup</a>
+
+<div>
+    <label for="clubFilter">Select Your Club:</label>
+    <select id="clubFilter" name="clubFilter"></select>
+</div>
+
+<div id="totalSignups">Total Signups: 0</div>
+<div id="message"></div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Fullname</th>
+            <th>Birthday</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Grade</th>
+            <th>Intern/Extern</th>
+            <th>Club</th>
+            <th>Reason</th>
+        </tr>
+    </thead>
+    <tbody id="signupsBody"></tbody>
+</table>
+
+</body>
+</html>
